@@ -8,7 +8,6 @@
 
 namespace app\relation\controller;
 
-use app\index\controller\Index;
 use app\relation\model\Organization as OrganizationModel;
 use think\ResponseStructure;
 
@@ -21,8 +20,22 @@ class Organization extends ResponseStructure
     public function getOrganization(){
         if($this->request->isGet()){
             $param = $this->request->get();
-            $result = OrganizationModel::where('id','=',27)->select();
-            (!is_array($result)) ? $this->res->resToMsg("",$result,200):
+            $pidArr = explode(",",$param['pids']);
+            //String数组转成Int数组
+            $newPid = array();
+            foreach ($pidArr as $key=>$value){
+                array_push($newPid,(int)$value);
+            }
+            if(count($pidArr) == 1 && $pidArr[0] == 0) {
+                $result = OrganizationModel::where('pid','=',0)->select();
+            }else if(count($pidArr) == 1 && $pidArr[0] != 0){
+                $result = OrganizationModel::where('pid','=',$newPid[0])->select();
+            }else{
+                $result = OrganizationModel::where('pid','in',$newPid)->select();
+            }
+            $resultArr = json_decode(json_encode($result));
+            if(count($resultArr) > 0)  $this->checkIfEnd($resultArr);
+            (count($resultArr) > 0) ? $this->res->resToMsg("",$result,200):
                 $this->res->clientError(110);
         }
         $this->res->clientError(103);
@@ -129,7 +142,7 @@ class Organization extends ResponseStructure
             $param = $this->request->post();
             //直接使用静态方法
             $result = OrganizationModel::destroy($param['id']);
-            ($result) ? $this->res->resToMsg("更新一条组织架构成功",$result):
+            ($result) ? $this->res->resToMsg("删除一条组织架构成功",$result):
                 $this->res->clientError(109);
         }
         $this->res->clientError(103);

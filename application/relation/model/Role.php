@@ -11,5 +11,8 @@ use think\Model;
 
 class Role extends Model
 {
+    //自动修改、更新时间戳
     protected $autoWriteTimestamp = true;
+    //返回结果集
+    protected $resultSetType = 'collection';
 }
