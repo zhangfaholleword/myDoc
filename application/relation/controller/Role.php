@@ -40,7 +40,6 @@ class Role extends ResponseStructure
         }
         $this->res->clientError(103);
     }
-    
 
     /**
      * @frontAPI

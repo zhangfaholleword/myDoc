@@ -32,7 +32,25 @@ Route::rule('api/createUser','relation/User/createUser','POST');
 Route::rule('api/deleteUser','relation/User/deleteUser','POST');
 Route::rule('api/updateUser','relation/User/updateUser','POST');
 
+//文件夹管理接口
+Route::rule('api/getFolder','document/Folder/getFolder','GET');
+Route::rule('api/createFolder','document/Folder/createFolder','POST');
+Route::rule('api/deleteFolder','document/Folder/deleteFolder','POST');
+Route::rule('api/updateFolder','document/Folder/updateFolder','POST');
 
+//文件管理接口
+Route::rule('api/getUploadByMe','document/Document/getUploadByMe','GET');
+Route::rule('api/getShareForMe','document/Document/getShareForMe','GET');
+Route::rule('api/getShareRecord','document/Document/getShareRecord','GET');
+Route::rule('api/deleteUploadByMe','document/Document/deleteUploadByMe','POST');
+Route::rule('api/deleteShareForMe','document/Document/deleteShareForMe','POST');
+Route::rule('api/updateShareRecord','document/Document/updateShareRecord','POST');
+Route::rule('api/saveShareDoc','document/Document/saveShareDoc','POST');
+Route::rule('api/upload','document/Document/upload','POST');
+Route::rule('api/share','document/Document/share','POST');
+
+//权限管理接口
+Route::rule('api/createPermission','permission/Permission/createPermission','POST');
 
 return [
     '__pattern__' => [
