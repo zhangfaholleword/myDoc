@@ -9,7 +9,6 @@
 namespace app\permission\controller;
 use app\permission\model\Permission as PermissionModel;
 use think\ResponseStructure;
-use think\Db;
 
 class Permission extends ResponseStructure
 {
@@ -34,6 +33,21 @@ class Permission extends ResponseStructure
             //通过获取新插入数据主键 判断插入是否成功
             ($permission->id) ? $this->res->resToMsg("新增权限名称成功",$permission->id):
                 $this->res->clientError(104);
+        }
+        $this->res->clientError(103);
+    }
+
+    /**
+     * @frontAPI
+     * 删除一条权限
+     */
+    public function deletePermission(){
+        if($this->request->isPost()){
+            $param = $this->request->post();
+            //直接使用静态方法
+            $result = PermissionModel::destroy($param['id']);
+            ($result) ? $this->res->resToMsg("删除权限成功",$result):
+                $this->res->clientError(109);
         }
         $this->res->clientError(103);
     }
