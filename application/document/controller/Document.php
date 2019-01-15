@@ -242,7 +242,7 @@ class Document extends ResponseStructure
                     Db::table('sharing_permission')->insertAll($insertRole);
                 }
                 if($deleteRole){
-                    Db::table('user_organization')
+                    Db::table('sharing_permission')
                         ->where('sharing_id',$sharingId)
                         ->where('permission_id','in',$deleteRole)
                         ->delete();

@@ -48,7 +48,13 @@ Route::rule('api/createPermission','permission/Permission/createPermission','POS
 Route::rule('api/deletePermission','permission/Permission/deletePermission','POST');
 //下载记录管理接口
 Route::rule('api/createDownload','download/Download/createDownload','POST');
-Route::rule('api/createDownload','download/Download/createDownload','POST');
+Route::rule('api/deleteDownload','download/Download/deleteDownload','POST');
+//系统菜单管理接口
+Route::rule('api/getMenuListByUser','menu/MenuList/getMenuListByUser','GET');
+Route::rule('api/getMenuIdByRole','menu/MenuList/getMenuIdByRole','GET');
+Route::rule('api/updateMenuIdByRole','menu/MenuList/updateMenuIdByRole','POST');
+Route::rule('api/createMenu','menu/MenuList/createMenu','POST');
+Route::rule('api/deleteMenu','menu/MenuList/deleteMenu','POST');
 
 return [
     '__pattern__' => [
